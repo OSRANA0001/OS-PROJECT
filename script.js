@@ -1,6 +1,3 @@
-/* script.js — theme, ripple, FAQ accordion, downloads, connect */
-/* Small, dependency-free, accessible */
-
 (function () {
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
@@ -8,13 +5,13 @@
   const root = document.documentElement;
   const THEME_KEY = 'jm_theme_v2';
 
-  // Initialize theme
+ 
   (function initTheme() {
   const saved = localStorage.getItem(THEME_KEY);
   if (saved) {
     root.setAttribute('data-theme', saved);
   } else {
-    // Default always light
+   
     root.setAttribute('data-theme', 'light');
   }
   updateThemeButtons();
@@ -29,7 +26,7 @@
     });
   }
 
-  // Theme toggle (delegated)
+
   document.addEventListener('click', (e) => {
     const t = e.target.closest('#theme-toggle');
     if (!t) return;
@@ -40,7 +37,7 @@
     updateThemeButtons();
   });
 
-  // Mark active nav link
+  
   (function markActiveNav() {
     const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     $$('a[data-nav]').forEach(a => {
@@ -49,7 +46,7 @@
     });
   })();
 
-  // Delegated ripple: create wave element
+  
   document.addEventListener('click', (e) => {
     const el = e.target.closest('.ripple');
     if (!el) return;
@@ -57,7 +54,7 @@
   }, { passive: true });
 
   function createRipple(el, e) {
-    // remove old waves in that element
+   
     el.querySelectorAll('.wave').forEach(n => n.remove());
     const rect = el.getBoundingClientRect();
     const wave = document.createElement('span');
@@ -72,8 +69,7 @@
     setTimeout(() => wave.remove(), 700);
   }
 
-  // FAQ accordion: works with .faq-question and .faq-answer
-  // FAQ accordion (simpler, error-free)
+ 
 (function faqSetup() {
   const items = document.querySelectorAll('.faq-item');
   if (!items.length) return;
@@ -82,16 +78,16 @@
     const btn = item.querySelector('.faq-q');
     btn.addEventListener('click', () => {
       const isActive = item.classList.contains('active');
-      // Close all
+      
       items.forEach(i => i.classList.remove('active'));
-      // Toggle clicked
+      
       if (!isActive) item.classList.add('active');
     });
   });
 })();
 
 
-  // Connect button(s) -> open LinkedIn
+ 
   (function connectSetup() {
     $$('#connect-btn').forEach(c => {
       c.addEventListener('click', (e) => {
@@ -101,7 +97,7 @@
     });
   })();
 
-  // Downloads: delegated via [data-file]
+ 
   document.addEventListener('click', (e) => {
     const el = e.target.closest('[data-file]');
     if (!el) return;
@@ -125,7 +121,7 @@
     }
   }
 
-  // Reveal footer disclaimer
+  
   (function footerReveal() {
     const d = document.getElementById('footer-disclaimer');
     if (!d) return;
